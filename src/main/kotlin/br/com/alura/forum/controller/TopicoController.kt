@@ -2,10 +2,7 @@ package br.com.alura.forum.controller
 
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.service.TopicoService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/topicos")
@@ -21,4 +18,9 @@ class TopicoController(private val service: TopicoService) {
         return service.buscarPorID(id)
     }
 
+    @PostMapping
+    fun cadastrar(@RequestBody topico: Topico) {
+        service.cadastrar(topico)
+
+    }
 }
