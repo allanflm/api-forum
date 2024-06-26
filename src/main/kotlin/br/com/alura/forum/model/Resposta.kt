@@ -1,7 +1,7 @@
 package br.com.alura.forum.model
 
-import jakarta.persistence.*
 import java.time.LocalDateTime
+import javax.persistence.*
 
 @Entity
 data class Resposta(
@@ -13,5 +13,5 @@ data class Resposta(
     val autor: Usuario,
     @ManyToOne
     val topico: Topico,
-    val solucao: Boolean,
+    val solucao: Boolean
 )

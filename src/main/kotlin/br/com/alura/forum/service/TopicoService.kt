@@ -1,6 +1,6 @@
 package br.com.alura.forum.service
 
-import br.com.alura.forum.dto.AtualizarTopicoForm
+import br.com.alura.forum.dto.AtualizacaoTopicoForm
 import br.com.alura.forum.dto.NovoTopicoForm
 import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.exception.NotFoundException
@@ -24,10 +24,9 @@ class TopicoService(
         }.collect(Collectors.toList())
     }
 
-    fun buscarPorID(id: Long): TopicoView {
-        val topico = repository.findById(id).orElseThrow {
-            NotFoundException(notFoundMessage)
-        }
+    fun buscarPorId(id: Long): TopicoView {
+        val topico = repository.findById(id)
+            .orElseThrow { NotFoundException(notFoundMessage) }
         return topicoViewMapper.map(topico)
     }
 
@@ -37,11 +36,9 @@ class TopicoService(
         return topicoViewMapper.map(topico)
     }
 
-    fun atualizar(form: AtualizarTopicoForm): TopicoView {
-
-        val topico = repository.findById(form.id).orElseThrow {
-            NotFoundException(notFoundMessage)
-        }
+    fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
+        val topico = repository.findById(form.id)
+            .orElseThrow { NotFoundException(notFoundMessage) }
         topico.titulo = form.titulo
         topico.mensagem = form.mensagem
         return topicoViewMapper.map(topico)
@@ -50,4 +47,5 @@ class TopicoService(
     fun deletar(id: Long) {
         repository.deleteById(id)
     }
+
 }
